@@ -31,6 +31,7 @@ public class MongoController {
     @RequestMapping(value = "/getAllPets", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> getAllPets() throws Exception {
 
+	log.debug("getting the list of all pets");
 	List<Pets> allPets = petsRepository.findAll();
 	allPets.stream().forEach(p -> log.debug(p.toString()));
 
@@ -42,8 +43,8 @@ public class MongoController {
 
     @RequestMapping(value = "/addPets", method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> addPets(@RequestBody Pets pets) {
-	if (log.isDebugEnabled())
-	    log.debug(pets.toString());
+	
+         log.debug(pets.toString());
 	pets.set_id(ObjectId.get());
 	petsRepository.save(pets);
 

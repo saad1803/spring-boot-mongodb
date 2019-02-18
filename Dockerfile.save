@@ -1,0 +1,12 @@
+# From java image
+FROM openjdk:8-jre-alpine
+
+#Maintainer
+MAINTAINER saad ahmed<saad.ahmed@teradata.com>
+
+VOLUME /tmp
+
+ADD target/*.jar mongodb.jar
+EXPOSE 8080
+# RUN bash -c ‘touch /mongodb.jar’
+ENTR ["java","-Dspring.data.mongodb.uri=mongodb://mongo/test", "-Djava.security.egd=file:/dev/./urandom","-jar","/mongo.jar"]
